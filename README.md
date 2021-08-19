@@ -354,7 +354,7 @@ $$
 
 ### 6th problem
 
-![image-20210814203251623](README.assets/image-20210814203251623.png)
+<img src="README.assets/image-20210814203251623.png" alt="image-20210814203251623" style="zoom:50%;" />
 
 #### solution (a):
 
@@ -712,3 +712,320 @@ $$
 $$
 (For any nonzero vector $\underline{v}$)
 
+## HW-3
+
+### 1
+
+<img src="README.assets/image-20210818165144912.png" alt="image-20210818165144912" style="zoom:50%;" />
+
+#### (a)
+
+First we have:
+$$
+p_{\theta}(y)=\theta^{T(\underline{y})}(1-\theta)^{(n-T(\underline{y}))}
+$$
+Where :
+$$
+T(\underline{y})=\sum_{k=1}^{n} y_{k}
+$$
+and notice:
+$$
+\begin{aligned}
+\phi&=\log (\theta /(1-\theta))\\
+C(\phi)&=e^{n \phi}
+\end{aligned}
+$$
+Thus, any unbiased function of $T$ is an MVUE for $\theta$ . Also notice that $E_{\theta}\{T(\underline{Y})\}=n \theta$, an estimate is given by:
+$$
+\hat{\theta}_{M V}(\underline{y})=\frac{T(\underline{y})}{n}=\frac{1}{n} \sum_{k=1}^{n} y_{k}
+$$
+
+#### (b)
+
+According to $\text { (IV.D.2) }$ 
+$$
+\hat{\theta}_{M L}(y)=\arg \left\{\max _{\theta \in \Lambda} p_{\theta}(y)\right\}
+\\
+=\arg \left\{\max _{0<\theta<1} \theta^{T(\underline{y})}(1-\theta)^{(n-T(\underline{y}))}\right\}=T(\underline{y}) / n=\hat{\theta}_{M V}(\underline{y})
+$$
+the bias:
+$$
+E_{\theta}\left\{\hat{\theta}_{M L}(\underline{Y})\right\}=\theta
+$$
+
+
+According to $\text { (IV.D.9) }$ the variance:
+$$
+Var(\hat{\theta}_{M L}(\underline{Y}))=\theta(1-\theta) / n
+$$
+
+
+#### (c)
+
+According to $\text { (IV.C.22) }$( condition 5) and $\text { (IV.C.26) }$:
+$$
+I_{\theta}=-E_{\theta}\left\{\frac{\partial^{2}}{\partial \theta^{2}} \log p_{\theta}(Y)\right\}= -E_{\theta}\left\{-\frac{T(\underline{Y})}{\theta^{2}}-\frac{n-T(\underline{Y})}{(1-\theta)^{2}} \right\}\\
+=\frac{n}{\theta}+\frac{n}{1-\theta}=\frac{n}{\theta(1-\theta)}
+$$
+
+
+So the CRLB is:
+$$
+C R L B=\frac{1}{I_{\theta}}=\frac{\theta(1-\theta)}{n}=\operatorname{Var}_{\theta}\left(\hat{\theta}_{M L}(\underline{Y})\right)
+$$
+  
+
+### 2
+
+![image-20210818173133151](README.assets/image-20210818173133151.png)
+
+First we have:
+$$
+p_{\theta}(y)=\frac{e^{-\theta} \theta^{y}}{y !}, \quad y \in 0,1, \ldots .
+$$
+Then:
+$$
+\frac{\partial}{\partial \theta} \log p_{\theta}(y)=\frac{\partial}{\partial \theta}(-\theta+y \log \theta)\\=-1+\frac{y}{\theta}
+$$
+Thus:
+$$
+\hat{\theta}_{M L}(y)=y
+$$
+Then the bias:
+$$
+E_{\theta}\left\{\hat{\theta}_{M L}(Y)\right\}=\operatorname{Var}_{\theta}\left(\hat{\theta}_{M L}(Y)\right)=\theta
+$$
+Finally according to $\text { (IV.C.22) }$( condition 5) and $\text { (IV.C.26) }$:
+$$
+I_{\theta}=-E_{\theta}\left\{\frac{\partial^{2}}{\partial \theta^{2}} \log p_{\theta}(Y)\right\}=\frac{E_{\theta}\{Y\}}{\theta^{2}}=\frac{1}{\theta}
+$$
+The $CRLB$ is thus:
+$$
+CRLB = \frac{1}{{I}_{\theta}}= \theta
+$$
+
+### 3
+
+<img src="README.assets/image-20210818173550385.png" alt="image-20210818173550385" style="zoom:50%;" />
+
+#### (a)
+
+because $Y_{k}$ is i.i.d and follows $\mathcal{N}\left(0,1+\theta s_{k}^{2}\right)$, the likelihood equation for estimating $\theta$ is :
+$$
+\begin{gathered}
+\frac{\partial}{\partial \theta} \log p_{\theta}(\underline{y})=\sum_{k=1}^{n} \frac{\partial}{\theta}\left\{-\frac{1}{2} \log \left(1+\theta s_{k}^{2}\right)-\frac{y_{k}^{2}}{2\left(1+\theta s_{k}^{2}\right)}\right\} \\
+=-\frac{1}{2} \sum_{k=1}^{n}\left\{\frac{s_{k}^{2}}{1+\theta s_{k}^{2}}-\frac{y_{k}^{2} s_{k}^{2}}{\left(1+\theta s_{k}^{2}\right)^{2}}\right\}
+\end{gathered}
+$$
+from which the likelihood equation becomes:
+$$
+\sum_{k=1}^{n} \frac{s_{k}^{2}\left(y_{k}^{2}-1-\hat{\theta}_{M L}(\underline{y}) s_{k}^{2}\right)}{\left(1+\hat{\theta}_{M L}(\underline{y}) s_{k}^{2}\right)^{2}}=0
+$$
+
+#### (b)
+
+Similar as the 2nd problem, write $I_{\theta}$:
+$$
+\begin{gathered}
+I_{\theta}=-E_{\theta}\left\{\frac{\partial^{2}}{\partial \theta^{2}} \log p_{\theta}(\underline{Y})\right\}=\sum_{k=1}^{n}\left\{\frac{s_{k}^{4} E_{\theta}\left\{Y_{k}^{2}\right\}}{\left(1+\theta s_{k}^{2}\right)^{3}}-\frac{s_{k}^{4}}{2\left(1+\theta_{k}^{2}\right)^{2}}\right\} \\
+=\frac{1}{2} \sum_{k=1}^{n} \frac{s_{k}^{4}}{\left(1+\theta s_{k}^{2}\right)^{2}}
+\end{gathered}
+$$
+So the $CRLB$ is :
+$$
+C R L B=\frac{1}{I_{\theta}}=\frac{2}{\sum_{k=1}^{n} \frac{s_{k}^{4}}{\left(1+\theta s_{k}^{2}\right)^{2}}}
+$$
+
+#### (c)
+
+according to the Eq. above:
+$$
+\sum_{k=1}^{n} \frac{s_{k}^{2}\left(y_{k}^{2}-1-\hat{\theta}_{M L}(\underline{y}) s_{k}^{2}\right)}{\left(1+\hat{\theta}_{M L}(\underline{y}) s_{k}^{2}\right)^{2}}=0
+$$
+And $s_{k}^{2}=1$, then $\hat{\theta}_{M L}(\underline{y})$ Becomes:
+$$
+\hat{\theta}_{M L}(\underline{y})=\left(\frac{1}{n} \sum_{k=1}^{n} y_{k}^{2}\right)-1
+$$
+
+
+#### (d)
+
+the bias:
+$$
+E_{\theta}\left\{\hat{\theta}_{M L}(\underline{Y})\right\}=\left(\frac{1}{n} \sum_{k=1}^{n} E_{\theta}\left\{Y_{k}^{2}\right\}\right)-1=\theta
+$$
+  The variance:
+$$
+\operatorname{Var}_{\theta}\left(\hat{\theta}_{M L}(\underline{Y})\right)=\frac{1}{n^{2}} \sum_{k=1}^{n} \operatorname{Var}_{\theta}\left(Y_{k}^{2}\right)=\frac{1}{n^{2}} \sum_{k=1}^{n} 2(!+\theta)^{2}=\frac{2(1+\theta)^{2}}{n}
+$$
+
+
+ the MLE is an MVUE in this case.
+
+### 4
+
+<img src="README.assets/image-20210818174615194.png" alt="image-20210818174615194" style="zoom:50%;" />
+
+#### (a)
+
+Note:
+$$
+p_{\theta}(\underline{y})=\exp \left\{\sum_{k=1}^{n} \log F\left(y_{k}\right) / \theta\right\}
+$$
+Also:
+$$
+E_{\theta}\left\{\sum_{k=1}^{n} \log F\left(Y_{k}\right)\right\}=n E_{\theta}\left\{\log F\left(Y_{1}\right)\right\}\\=\frac{n}{\theta} \int_{-\infty}^{\infty} \log F\left(Y_{1}\right)\left[F\left(y_{1}\right)\right]^{(1-\theta) / \theta} f\left(y_{1}\right) d y_{1}
+$$
+Let $x=\log F\left(y_{1}\right)$, and note $d \log F\left(y_{1}\right)=\frac{f\left(y_{1}\right)}{F\left(y_{1}\right)} d y_{1}$, $\left[F\left(y_{1}\right)\right]^{1 / \theta}=\exp \left\{\log F\left(y_{1}\right) / \theta\right\}$
+
+. Then:
+$$
+E_{\theta}\left\{\sum_{k=1}^{n} \log F\left(Y_{k}\right)\right\}=\frac{n}{\theta} \int_{-\infty}^{0} x e^{x / \theta} d x=-n \theta
+$$
+Thus:
+$$
+E_{\theta}\left\{\hat{\theta}_{M V}(\underline{Y})\right\}=\theta
+$$
+which implies that $\hat{\theta}_{M V}$ is an MVUE since it is an unbiased function of a complete sufficient statistic.
+
+#### (b)
+
+It is straightforward to see that $w(\theta \mid y)$ is of the same form as the prior with $c$ replaced by $c-\sum_{k=1}^{n} \log F\left(y_{k}\right)$, and $m$ replaced by $n+m$. Thus, $E\{\Theta \mid Y\} $is of the same form as the prior with $c$ replaced by $c-\sum_{k=1}^{n} \log F\left(y_{k}\right)$, and $m$ replaced by $n+m$. So:
+$$
+E\{\Theta \mid Y\}=\frac{c-\sum_{k=1}^{n} \log F\left(Y_{k}\right)}{m+n-1}
+$$
+
+#### (c)
+
+In this example, the prior and posterior distributions have the same form. The only change is that the parameters of that distribution are updated as new data is observed. A prior with this property is said to be a reproducing prior. The prior parameters, $c$ and $m$, can be thought of as coming from an earlier sample of size $m$. As $n$ becomes large compared to $m$, the importance of these prior parameters in the estimate diminishes. Note that $\sum_{k=1}^{n} \log F\left(Y_{k}\right)$ behaves like $n E\left\{\log F\left(Y_{1}\right)\right\}$ for large $n$. Thus, with $n \gg m$, the estimate is appropximately given by the MVUE of Part a. Altenatively, with $m \gg n$, the estimate is approximately the prior mean, $c /(m-1)$. Between these two extremes, there is a balance between prior and observed information.
+
+
+
+
+
+### 5
+
+<img src="README.assets/image-20210818180105485.png" alt="image-20210818180105485" style="zoom:50%;" />
+
+#### (a)
+
+The log-likelihood function is
+$$
+\log p(\underline{y} \mid A, \phi)=-\frac{1}{2 \sigma^{2}} \sum_{k=1}^{n}\left[y_{k}-A \sin \left(\frac{k \pi}{2}+\phi\right)\right]^{2}-\frac{n}{2} \log \left(2 \pi \sigma^{2}\right) .
+$$
+The likelihood equations are thus:
+$$
+\sum_{k=1}^{n}\left[y_{k}-\hat{A} \sin \left(\frac{k \pi}{2}+\hat{\phi}\right)\right] \sin \left(\frac{k \pi}{2}+\hat{\phi}\right)=0
+$$
+and
+$$
+\hat{A} \sum_{k=1}^{n}\left[y_{k}-\hat{A} \sin \left(\frac{k \pi}{2}+\hat{\phi}\right)\right] \cos \left(\frac{k \pi}{2}+\hat{\phi}\right)=0 .
+$$
+These equations are solved by the estimates:
+$$
+\begin{gathered}
+\hat{A}_{M L}=\sqrt{y_{c}^{2}+y_{s}^{2}} \\
+\hat{\phi}_{M L}=\tan ^{-1}\left(\frac{y_{c}}{y_{s}}\right)
+\end{gathered}
+$$
+where
+$$
+y_{c}=\frac{1}{n} \sum_{k=1}^{n} y_{k} \cos \left(\frac{k \pi}{2}\right) \equiv \frac{1}{n} \sum_{k=1}^{n / 2}(-1)^{k} y_{2 k},\\
+y_{s}=\frac{1}{n} \sum_{k=1}^{n} y_{k} \sin \left(\frac{k \pi}{2}\right) \equiv \frac{1}{n} \sum_{k=1}^{n / 2}(-1)^{k+1} y_{2 k-1}
+$$
+
+#### (b)
+
+Appending the prior to the above problem yields MAP estimates:
+$$
+\begin{gathered}
+\hat{\phi}_{M A P}=\hat{\phi}_{M L}, \\
+\hat{A}_{M A P}=\frac{\hat{A}_{M L}+\sqrt{\left(\frac{r}{n}\right)^{2}+\frac{2(1+\alpha) \sigma^{2}}{n}}}{1+\alpha},
+\end{gathered}
+$$
+$\text { where } \alpha \equiv \frac{2 \sigma^{2}}{n \beta^{2}} \text {. }$
+
+#### (c)
+
+Note that, when $\beta \rightarrow \infty$ (and the prior "diffuses"), the MAP estimate of $A$ does not approach the MLE of $A$. However, as $n \rightarrow \infty$, the MAP estimate does approach the MLE.
+
+## HW-4
+
+
+
+### 1
+
+![image-20210819095813290](README.assets/image-20210819095813290.png)
+
+
+
+when $\underline{Y}_{0}^{k}$ is given the $\underline{S}_{k}$ is then constant. Then we can write the filter:
+$$
+\underline{\hat{X}}_{t+1 \mid t}=\mathbf{F}_{t} \underline{\hat{X}}_{t \mid t}+E\left\{\boldsymbol{\Gamma}_{t \underline{s}_{t}} \mid \underline{Y}_{0}^{t}\right\}=\mathbf{F}_{t} \underline{\hat{X}}_{t \mid t}+\boldsymbol{\Gamma}_{t} \underline{s}_{t}
+$$
+So that:
+$$
+\boldsymbol{\Sigma}_{t+1 \mid t}=\mathbf{F}_{t} \boldsymbol{\Sigma}_{t \mid t} \mathbf{F}_{t}^{T}+\mathbf{G}_{t} \mathbf{Q}_{t} \mathbf{G}_{t}^{T}+\operatorname{Cov}\left(\boldsymbol{\Gamma}_{t} \underline{s}_{t} \mid \underline{Y}_{0}^{t}\right)=\mathbf{F}_{t} \boldsymbol{\Sigma}_{t \mid t} \mathbf{F}_{t}^{T}+\mathbf{G}_{t} \mathbf{Q}_{t} \mathbf{G}_{t}^{T}
+$$
+Note that the second of these two equations is the same as when there is no measurement feedback. That is to say, the measurement feedback has no effect on the measurement update equations. The conditional statistics of $\underline{X}_{t}$ and $\underline{Y}_{t}$ given $\underline{Y}_{0}^{t-1}$ are Gaussian. Thus, the measurement update is unchanged from the case of no measurement feedback since it depends only on this joint Gaussian property and the linearity of measurement equation.
+
+
+
+### 2
+
+![image-20210819100110907](README.assets/image-20210819100110907.png)
+
+
+
+Note that although $\underline{U}_{t}$ and $\underline{V}_{t}$ are dependent, the Gaussian vector $\underline{U}_{t}^{\prime} \equiv \underline{U}_{t}-\mathbf{C}_{t} \mathbf{R}_{t}^{-1} \underline{V}_{t}$ is independent
+of $\underline{V}_{t} .$ To take advantage of this, we may add the zero quantity $\mathbf{C}_{t} \mathbf{R}_{t}^{-1}\left[\underline{Y}_{t}-\mathbf{H}_{t} \underline{X}_{t}-\underline{V}_{t}\right]$
+to the $t^{\text {th }}$ state input, which yields the equivalent state equation
+$$
+\underline{X}_{t+1}=\mathbf{F}_{t} \underline{X}_{t}+\mathbf{G}_{t} \underline{U}_{t}^{\prime}+\mathbf{G}_{t} \mathbf{C}_{t} \mathbf{R}_{t}^{-1}\left(\underline{Y}_{t}-\mathbf{H}_{t} \underline{X}_{t}\right) 
+$$
+So, we have an equivalent problem with independent state and measurement noises, but with the measurement feedback term $\mathbf{G}_{t} \mathbf{C}_{t} \mathbf{R}_{t}^{-1} \underline{Y}_{t}$, and with the new state matrix $\left(\mathbf{F}_{t}-\mathbf{G}_{t} \mathbf{C}_{t} \mathbf{R}_{t}^{-1} \mathbf{H}_{t}\right)$. We also have a different correlation matrix for the state input, since
+$$
+\operatorname{Cov}\left(\underline{U}_{t}^{\prime}\right)=\mathbf{Q}_{t}-\mathbf{C}_{t} \mathbf{R}_{t}^{-1} \mathbf{C}_{t}^{T}
+$$
+Applying the result of Exercise 3 and eliminating the measurement update equations yields the given result.
+
+
+
+### 3
+
+![image-20210819100202512](README.assets/image-20210819100202512.png)
+
+#### (a)
+
+a. This result follows by induction on $t$. We first note that, for $t=j$, the given equality follows by definition. From the state equation we have that, for $k>j$, $E\left\{\left(\underline{X}_{j}-\underline{\hat{X}}_{j \mid k}\right) \underline{X}_{k+1}^{T}\right\}=E\left\{\left(\underline{X}_{j}-\underline{\hat{X}}_{j \mid k}\right)\left(\mathbf{F}_{k} \underline{X}_{k}+\mathbf{G}_{k} \underline{U}_{k}\right)^{T}\right\}=E\left\{\left(\underline{X}_{j}-\underline{\hat{X}}_{j \mid k}\right) \underline{X}_{k}^{T}\right\} \mathbf{F}_{k}^{T}$
+where we use the fact that $\underline{U}_{k}$ has zero mean and is independent of both $\underline{X}_{j}$ and $\underline{\hat{X}}_{j \mid k}$. Now, on applying the recursion for $\underline{\hat{X}}_{j \mid k}$ to this equation we have $E\left\{\left(\underline{X}_{j}-\underline{\hat{X}}_{j \mid k}\right) \underline{X}_{k+1}^{T}\right\}=E\left\{\left(\underline{X}_{j}-\underline{\hat{X}}_{j \mid k-1}\right) \underline{X}_{k}^{T}\right\} \mathbf{F}_{k}^{T}-\mathbf{K}_{k}^{a} E\left\{\left(\underline{Y}_{k}-\mathbf{H}_{k} \hat{X}_{k \mid k-1}\right) \underline{X}_{k}^{T}\right\} \mathbf{F}_{k}^{T}$
+We now assume that the given equality is true for $t=k$. From this and the definition of $\mathbf{K}_{k}^{a}$, we then have
+$$
+\begin{aligned}
+&E\left\{\left(\underline{X}_{j}-\underline{\hat{X}}_{j \mid k}\right) \underline{X}_{k+1}^{T}\right\}=\boldsymbol{\Sigma}_{k \mid k-1}^{a}\left[\mathbf{I}-\mathbf{H}_{k}^{T}\left(\mathbf{H}_{k} \boldsymbol{\Sigma}_{k \mid k-1} \mathbf{H}_{k}^{T}+\mathbf{R}_{k}\right)^{-1} E\left\{\left(\underline{Y}_{k}-\mathbf{H}_{k} \underline{\hat{X}}_{k \mid k-1}\right) \underline{X}_{k}^{T}\right\}\right] \\
+&=\boldsymbol{\Sigma}_{k \mid k-1}^{a}\left[\mathbf{I}-\mathbf{H}_{k}^{T}\left(\mathbf{H}_{k} \boldsymbol{\Sigma}_{k \mid k-1} \mathbf{H}_{k}^{T}+\mathbf{R}_{k}\right)^{-1} \mathbf{H}_{k} E\left\{\left(\underline{X}_{k}-\hat{X}_{k \mid k-1}\right) \underline{X}_{k}^{T}\right\}\right] \mathbf{F}_{k}^{T} \\
+&\qquad=\mathbf{\Sigma}_{k \mid k-1}^{a}\left[\mathbf{I}-\mathbf{H}_{k}^{T}\left(\mathbf{H}_{k} \boldsymbol{\Sigma}_{k \mid k-1} \mathbf{H}_{k}^{T}+\mathbf{R}_{k}\right)^{-1} \mathbf{H}_{k} \mathbf{\Sigma}_{k \mid k-1}\right] \mathbf{F}_{k}^{T}=\boldsymbol{\Sigma}_{k \mid k-1}^{a}\left[\mathbf{I}-\mathbf{H}_{k}^{T} \mathbf{K}_{k}^{T}\right] \mathbf{F}_{k}^{T}
+\end{aligned}
+$$
+where the last equality follows by definiton of $\mathbf{K}_{k}$. Applying the recursion for $\boldsymbol{\Sigma}_{k+1 \mid k}^{a}$, we have
+$$
+E\left\{\left(\underline{X}_{j}-\underline{\hat{X}}_{j \mid k}\right) \underline{X}_{k+1}^{T}\right\}=\boldsymbol{\Sigma}_{k+1 \mid k}^{a}
+$$
+which shows that the given equation for $t=k+1$. The induction principle thus gives the desired result.
+
+#### (b)
+
+Note that $\underline{X}_{j} \text { and } \underline{Y}_{t} \text { are jointly Gaussian conditioned on } \underline{Y}_{0}^{t-1} \text {. }$
+$$
+\operatorname{Cov}\left(\underline{X}_{j}, \underline{Y}_{t} \mid \underline{Y}_{0}^{t-1}\right)\left[\operatorname{Cov}\left(\underline{Y}_{t} \mid \underline{Y}_{0}^{t-1}\right)\right]^{-1}=\mathbf{K}_{t}^{a}
+$$
+$\text { Since } \underline{Y}_{t}=\mathbf{H}_{t} \underline{X}_{t}+\underline{V}_{t}, \text { the result from Part a. implies this equality. }$
+
+
+
+### 4
+
+![image-20210819100218956](README.assets/image-20210819100218956.png)
+
+This is the Kalman-Bucy problem with all dimensions equal to unity, $\mathbf{F}_{k} \equiv 1, \mathbf{G}_{k} \equiv$ $\mathbf{Q}_{k} \equiv 0, \mathbf{H}_{k}=s_{k}, \mathbf{R}_{k} \equiv \sigma^{2}, \underline{m}_{0} \equiv \mu, \boldsymbol{\Sigma}_{0} \equiv v^{2}, \hat{\underline{X}}_{n+1 \mid n} \equiv \hat{\underline{X}}_{n \mid n} \equiv \hat{\theta}_{n}$, and $\boldsymbol{\Sigma}_{n \mid n} \equiv \boldsymbol{\Sigma}_{n \mid n} \equiv$
+$E\left\{\left(\hat{\theta}_{n}-\Theta\right)^{2}\right\}$. The desired recursions thus follow by eliminating either set of updates from (V.B.14) - (V.B.16). The resulting estimate is the same as that found in Example IV.B.2.
